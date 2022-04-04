@@ -1,0 +1,76 @@
+<side-panel></side-panel>
+<header-panel></header-panel>
+<div class="dash-table">
+  <!-- <h4>{{title}}</h4> -->
+  <div class="path-block">
+    <h4 class="txt-path">
+      <a href="#!/dashboard">Home</a>&nbsp;&nbsp;<i
+        class="fa-solid fa-chevron-right"
+      ></i
+      >&nbsp;&nbsp;{{title}}
+    </h4>
+    <br />
+  </div>
+  <div class="mb-3 search-bar">
+    <!-- <i class="fa fa-search search-icon" style="position: absolute"></i> -->
+    <input
+      type="text"
+      class="form-control search-bar"
+      name="search"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      maxlength="6"
+      ng-model="employee"
+      placeholder="Search"
+    />
+  </div>
+  <br />
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <!-- <th scope="col">id</th> -->
+        <th scope="col" ng-click="orderBy('firstname')">
+          <i class="fa fa-user"></i>&nbsp;&nbsp;FirstName
+        </th>
+        <th scope="col" ng-click="orderBy('lastname')">
+          <i class="fa fa-user"></i>&nbsp;&nbsp;LastName
+        </th>
+        <th scope="col"><i class="fa fa-at"></i>&nbsp;&nbsp;Email</th>
+        <th scope="col"><i class="fa fa-person"></i>&nbsp;&nbsp;Gender</th>
+        <th scope="col"><i class="fa fa-mobile"></i>&nbsp;&nbsp;Mo-No.</th>
+        <th scope="col" ng-click="orderBy('dob')">
+          <i class="fa fa-calendar-day"></i>&nbsp;&nbsp;DOB
+        </th>
+        <th scope="col" ng-click="orderBy('salary')">
+          <i class="fa fa-money-bill"></i>&nbsp;&nbsp;Salary
+        </th>
+      </tr>
+    </thead>
+    <tbody ng-if="employees.length > 0">
+      <tr
+        ng-repeat="employee in employees | filter: employee | orderBy:orderByProperty"
+      >
+        <td>{{employee.firstname | uppercase}}</td>
+        <td>{{employee.lastname | uppercase}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.gender}}</td>
+        <td>{{employee.mobile}}</td>
+        <td>{{employee.dob | date | uppercase}}</td>
+        <td>{{employee.salary | currency}}</td>
+        <!-- currency:"₹" -->
+      </tr>
+    </tbody>
+    <tbody ng-if="employees.length == 0">
+      <tr class="text-center">
+        <td colspan="7">No Records Found!!</td>
+      </tr>
+      <!-- <tr>
+        <div class="msg-block-error" ng-if="employees.length == 0">
+          <p class="txt-error">
+            No Records Found!&nbsp;&nbsp;<i class="fa-solid fa-close"></i>
+          </p>
+        </div>
+      </tr> -->
+    </tbody>
+  </table>
+</div>

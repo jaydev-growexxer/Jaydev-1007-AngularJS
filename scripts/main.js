@@ -18,6 +18,20 @@ myLoginApp.component('navBarLogin', {
   },
 });
 
+myLoginApp.component('sidePanel', {
+  templateUrl: './components/dashboardComponents/sidePanel.html',
+});
+
+myLoginApp.component('headerPanel', {
+  templateUrl: './components/dashboardComponents/headerPanel.html',
+  controller: function ($window, $location) {
+    this.signOut = function () {
+      $window.sessionStorage.setItem('isAuth', false);
+      $location.path('/home');
+    };
+  },
+});
+
 myLoginApp.service('loginService', function ($http) {
   this.getAdmins = function (cb) {
     $http.get('assets/data/users.json').then(
@@ -29,6 +43,66 @@ myLoginApp.service('loginService', function ($http) {
       }.bind(this)
     );
   };
+});
+
+myLoginApp.service('employeeService', function ($http) {
+  this.employees = [];
+  this.getEmployees = function (cb) {
+    if (this.employees.length === 0) {
+      $http
+        .get('assets/data/employees.json') //https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001
+        .then(
+          function (response) {
+            this.employees = response.data;
+            // console.log(response);
+            cb();
+          }.bind(this)
+        );
+    } else {
+      cb();
+    }
+  };
+  this.addEmployee = function (cb, employee) {
+    this.employees.push(employee);
+    cb();
+  };
+  /*this.checkData = function (cb) {
+    this.getEmployees;
+    if (this.employees.length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };*/
+});
+
+myLoginApp.service('menuService', function ($http) {
+  this.menus = [];
+  this.getMenus = function (cb) {
+    if (this.menus.length === 0) {
+      $http
+        .get('assets/data/dashboardMenus.json') //https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001
+        .then(
+          function (response) {
+            this.menus = response.data;
+            // console.log(response);
+            cb();
+          }.bind(this)
+        );
+    } else {
+      cb();
+    }
+  };
+});
+
+myLoginApp.controller('menuController', function ($scope, menuService) {
+  $scope.callBackFunction = function () {
+    $scope.menus = menuService.menus;
+  };
+  // if ($scope.employees === undefined) {
+  //   employeeService.getEmployees($scope.callBackFunction);
+  // }
+  menuService.getMenus($scope.callBackFunction);
 });
 
 myLoginApp.controller(
@@ -138,6 +212,16 @@ myLoginApp.config(function ($routeProvider) {
     .when('/register', {
       templateUrl: './components/register.html',
       controller: 'registerController',
+    })
+    .when('/dashboard', {
+      templateUrl: './components/dashboardComponents/dashboard.html',
+      controller: 'employeeController',
+    })
+    .when('/employeelist', {
+      templateUrl: './components/dashboardComponents/employeeList.html',
+    })
+    .when('/addemployee', {
+      templateUrl: './components/dashboardComponents/addEmployee.html',
     })
     .otherwise({
       redirectTo: '/home',
