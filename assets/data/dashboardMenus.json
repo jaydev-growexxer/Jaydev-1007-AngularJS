@@ -1,0 +1,12 @@
+[
+  {
+    "iconClass": "fa-solid fa-list",
+    "menuTitle": "Employee List",
+    "routeName": "employeelist"
+  },
+  {
+    "iconClass": "fa-solid fa-circle-plus",
+    "menuTitle": "Add Employee",
+    "routeName": "addemployee"
+  }
+]

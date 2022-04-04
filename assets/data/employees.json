@@ -1,0 +1,92 @@
+[
+  {
+    "firstname": "Cristian",
+    "lastname": "Russel",
+    "email": "Cristian.Russel@dummyapis.com",
+    "gender": "Male",
+    "mobile": "4802097461",
+    "dob": "25/12/1997",
+    "salary": 1.0
+  },
+  {
+    "firstname": "Bernice",
+    "lastname": "Ruecker",
+    "email": "Bernice.Ruecker@dummyapis.com",
+    "gender": "Male",
+    "mobile": "4510094483",
+    "dob": "05/04/1995",
+    "salary": 2.0
+  },
+  {
+    "firstname": "Pinkie",
+    "lastname": "Bednar",
+    "email": "Pinkie.Bednar@dummyapis.com",
+    "gender": "Female",
+    "mobile": "4605391302",
+    "dob": "28/06/1977",
+    "salary": 3.0
+  },
+  {
+    "firstname": "Micaela",
+    "lastname": "Tromp",
+    "email": "Micaela.Tromp@dummyapis.com",
+    "gender": "Female",
+    "mobile": "4478993597",
+    "dob": "27/03/1934",
+    "salary": 4.0
+  },
+  {
+    "firstname": "Pat",
+    "lastname": "Kuhic",
+    "email": "Pat.Kuhic@dummyapis.com",
+    "gender": "Female",
+    "mobile": "4852296912",
+    "dob": "15/10/1981",
+    "salary": 5.0
+  },
+  {
+    "firstname": "Lillian",
+    "lastname": "Bechtelar",
+    "email": "Lillian.Bechtelar@dummyapis.com",
+    "gender": "Male",
+    "mobile": "4502092752",
+    "dob": "02/04/1945",
+    "salary": 6.0
+  },
+  {
+    "firstname": "Pinkie",
+    "lastname": "Swift",
+    "email": "Pinkie.Swift@dummyapis.com",
+    "gender": "Male",
+    "mobile": "4029499483",
+    "dob": "19/10/1948",
+    "salary": 7.0
+  },
+  {
+    "firstname": "Percival",
+    "lastname": "Mante",
+    "email": "Percival.Mante@dummyapis.com",
+    "gender": "Male",
+    "mobile": "4468295727",
+    "dob": "25/10/1948",
+    "salary": 8.0
+  },
+  {
+    "firstname": "Katrina",
+    "lastname": "Harber",
+    "email": "Katrina.Harber@dummyapis.com",
+    "gender": "Male",
+    "mobile": "4355792232",
+    "dob": "05/03/1976",
+    "salary": 9.0
+  },
+  {
+    "firstname": "Friedrich",
+    "lastname": "Hessel",
+    "email": "Friedrich.Hessel@dummyapis.com",
+    "gender": "Female",
+    "mobile": "4732396948",
+    "dob": "24/03/1948",
+    "salary": 10.0
+  }
+]

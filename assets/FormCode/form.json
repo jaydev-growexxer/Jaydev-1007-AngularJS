@@ -1,0 +1,57 @@
+[
+  "firstname",
+  "lastname",
+  {
+    "key": "email",
+    "type": "email",
+    "placeholder": "name@example.com"
+  },
+  {
+    "key": "gender",
+    "type": "radios",
+    "titleMap": [
+      { "value": "male", "name": "Male" },
+      { "value": "female", "name": "Female" }
+    ]
+  },
+  {
+    "key": "mobile",
+    "type": "string",
+    "placeholder": "Enter Your Mobile Number"
+  },
+  {
+    "key": "dob",
+    "type": "date"
+  },
+  {
+    "key": "salaryformat",
+    "type": "select",
+    "titleMap": [
+      { "value": "dollar", "name": "$" },
+      { "value": "rupees", "name": "₹" },
+      { "value": "pound", "name": "£" },
+      { "value": "sar", "name": "﷼" },
+      { "value": "dirham", "name": "د.إ" }
+    ]
+  },
+  {
+    "key": "salary",
+    "type": "number",
+    "placeholder": "Enter Your Salary"
+  },
+  {
+    "key": "password",
+    "type": "password",
+    "placeholder": "Enter a password"
+  },
+  {
+    "key": "repassword",
+    "type": "password",
+    "placeholder": "Rewrite for Confirmation"
+  },
+  {
+    "type": "submit",
+    "style": "btn-info",
+    "title": "OK"
+  }
+]
