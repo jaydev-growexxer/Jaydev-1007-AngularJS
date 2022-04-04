@@ -200,6 +200,165 @@ myLoginApp.controller(
   }
 );
 
+myLoginApp.controller(
+  'employeeController',
+  function ($scope, $window, $location, employeeService) {
+    $scope.title = 'Employee Details';
+    $scope.employees = [];
+    if ($window.sessionStorage.getItem('isAuth') === 'false') {
+      $location.path('/login');
+    }
+    $scope.callBackFunction = function () {
+      $scope.employees = employeeService.employees;
+    };
+    // if ($scope.employees === undefined) {
+    //   employeeService.getEmployees($scope.callBackFunction);
+    // }
+    employeeService.getEmployees($scope.callBackFunction);
+  }
+);
+
+myLoginApp.controller(
+  'addEmployeeController',
+  function ($scope, $window, $location, employeeService) {
+    $scope.title = 'Add Employee Details';
+    if ($window.sessionStorage.getItem('isAuth') === 'false') {
+      $location.path('/login');
+    }
+    $scope.schema = {
+      type: 'object',
+      title: 'Register Employee',
+      properties: {
+        firstname: {
+          title: 'First Name',
+          type: 'string',
+          pattern: '^[a-zA-Z]*$',
+          validationMessage: 'Name contains only Alphabetic Characteres.',
+          maxLength: 15,
+          minLength: 3,
+        },
+        lastname: {
+          title: 'Last Name',
+          type: 'string',
+          pattern: '^[a-zA-Z]*$',
+          validationMessage: 'Name contains only Alphabetic Characteres.',
+          maxLength: 15,
+          minLength: 3,
+        },
+        email: {
+          title: 'Email',
+          type: 'string',
+          pattern: '^\\S+@\\S+$',
+          validationMessage: 'Email Should be Valid!',
+          // description: 'Password will be used for login.',
+        },
+        gender: {
+          title: 'Gender',
+          type: 'string',
+        },
+        mobile: {
+          title: 'Mobile Number',
+          type: 'string',
+          minLength: 10,
+          maxLength: 10,
+        },
+        dob: {
+          title: 'Date of Birth',
+          type: 'date',
+        },
+        salary: {
+          title: 'Salary',
+          type: 'number',
+          pattern: '^[1-9]+[0-9]*$',
+        },
+      },
+      required: [
+        'firstname',
+        'lastname',
+        'email',
+        'gender',
+        'mobile',
+        'dob',
+        'salary',
+      ],
+    };
+
+    $scope.form = [
+      'firstname',
+      'lastname',
+      {
+        key: 'email',
+        type: 'email',
+        placeholder: 'name@example.com',
+      },
+      {
+        key: 'gender',
+        type: 'radios',
+        titleMap: [
+          { value: 'Male', name: 'Male' },
+          { value: 'Female', name: 'Female' },
+        ],
+      },
+      {
+        key: 'mobile',
+        type: 'string',
+        placeholder: 'Enter Your Mobile Number',
+      },
+      {
+        key: 'dob',
+        type: 'date',
+      },
+      {
+        key: 'salary',
+        type: 'number',
+        placeholder: 'Enter Your Salary',
+      },
+      {
+        type: 'submit',
+        style: 'btn-info',
+        title: 'OK',
+      },
+    ];
+
+    $scope.model = {};
+
+    $scope.callBackFunction = function () {
+      $scope.employees = employeeService.getEmployees;
+    };
+
+    $scope.onRegister = function (form) {
+      $scope.$broadcast('schemaFormValidate');
+      if (form.$valid) {
+        employeeService.getEmployees($scope.callBackFunction);
+        employeeService.addEmployee($scope.callBackFunction, $scope.model);
+        console.log($scope.model);
+        console.log(employeeService.employees);
+        document.querySelector('.msg-block-success').classList.remove('hidden');
+        $location.path('/employeelist');
+        setTimeout(() => {
+          document.querySelector('.msg-block-success').classList.add('hidden');
+          // $location.path('/employeelist');
+          // window.location.href =
+          //   'http://127.0.0.1:5500/angularjsfinaltest/#!/employeelist';
+        }, 1000);
+      } else {
+        document.querySelector('.msg-block-error').classList.remove('hidden');
+        setTimeout(() => {
+          document.querySelector('.msg-block-error').classList.add('hidden');
+        }, 2000);
+      }
+      /*if (!employeeService.checkData) {
+        document.querySelector('.msg-block-error').classList.remove('hidden');
+        setTimeout(() => {
+          document.querySelector('.msg-block-error').classList.add('hidden');
+          // window.location.href =
+          //   'http://127.0.0.1:5500/angularjsfinaltest/#!/employeelist';
+        }, 1000);
+      }*/
+    };
+  }
+);
+
 myLoginApp.config(function ($routeProvider) {
   $routeProvider
     .when('/home', {
@@ -219,9 +378,11 @@ myLoginApp.config(function ($routeProvider) {
     })
     .when('/employeelist', {
       templateUrl: './components/dashboardComponents/employeeList.html',
+      controller: 'employeeController',
     })
     .when('/addemployee', {
       templateUrl: './components/dashboardComponents/addEmployee.html',
+      controller: 'addEmployeeController',
     })
     .otherwise({
       redirectTo: '/home',
