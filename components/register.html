@@ -1,0 +1,21 @@
+<nav-bar-login listitem="Admin"></nav-bar-login>
+<div class="page-header">
+  <h1 class="primary-heading">Please Register to Enter</h1>
+</div>
+<div class="login-container">
+  <div>
+    <form
+      sf-schema="schema"
+      sf-form="form"
+      sf-model="model"
+      name="registerUser"
+      ng-submit="onRegister(registerUser)"
+      class="form-container"
+    ></form>
+  </div>
+  <div class="error-block hidden">
+    <p class="txt-error">
+      Input is Invalid&nbsp;&nbsp;<i class="fa fa-close"></i>
+    </p>
+  </div>
+</div>
