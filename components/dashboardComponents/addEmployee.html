@@ -1,0 +1,37 @@
+<side-panel></side-panel>
+<header-panel></header-panel>
+<div class="dash-table-add">
+  <!-- <h4 class="primary-heading">{{title}}</h4> -->
+  <div class="path-block">
+    <h4 class="txt-path">
+      <a href="#!/dashboard">Home</a>&nbsp;&nbsp;<i
+        class="fa-solid fa-chevron-right"
+      ></i
+      >&nbsp;&nbsp;{{title}}
+    </h4>
+    <br />
+  </div>
+  <div class="msg-block-success hidden">
+    <p class="txt-success">
+      Data Added Successfully&nbsp;&nbsp;<i class="fa-solid fa-check"></i>
+    </p>
+  </div>
+  <div class="msg-block-error hidden">
+    <p class="txt-error">
+      Oops! Invalid Entry!&nbsp;&nbsp;<i class="fa-solid fa-close"></i>
+    </p>
+  </div>
+  <div class="error-block hidden">
+    <p class="txt-error">
+      Input is Invalid&nbsp;&nbsp;<i class="fa fa-close"></i>
+    </p>
+  </div>
+  <form
+    sf-schema="schema"
+    sf-form="form"
+    sf-model="model"
+    name="registerEmployee"
+    ng-submit="onRegister(registerEmployee)"
+    class="form-container"
+  ></form>
+</div>

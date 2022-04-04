@@ -1,0 +1,14 @@
+<div id="side-panel" ng-controller="menuController">
+  <!-- <img src="https://i.pravatar.cc/300?img=3" class="img-logo" alt="" /> -->
+  <img
+    src="https://preview.keenthemes.com/metronic8/demo6/assets/media/logos/logo-demo6.svg"
+    alt=""
+    class="img-logo"
+  />
+  <div class="panel-items" ng-repeat="menu in menus">
+    <div class="panel-item">
+      <i class="{{menu.iconClass}}"></i>
+      <a href="#!/{{menu.routeName}}" class="menu-title">{{menu.menuTitle}}</a>
+    </div>
+  </div>
+</div>
