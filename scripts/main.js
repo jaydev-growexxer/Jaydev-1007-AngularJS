@@ -4,13 +4,6 @@ const myLoginApp = angular.module('myLoginApp', [
   'schemaForm',
 ]);
 
-/*myLoginApp.component('navBar', {
-  templateUrl: './components/navBars/navBar.html',
-  bindings: {
-    listitem: '@',
-  },
-});*/
-
 myLoginApp.component('navBarLogin', {
   templateUrl: './components/navBars/navBarLogin.html',
   bindings: {
@@ -37,8 +30,6 @@ myLoginApp.service('loginService', function ($http) {
     $http.get('assets/data/users.json').then(
       function (response) {
         this.admins = response.data;
-        // $scope.admins = response.data;
-        // console.log(response);
         cb();
       }.bind(this)
     );
@@ -49,15 +40,12 @@ myLoginApp.service('employeeService', function ($http) {
   this.employees = [];
   this.getEmployees = function (cb) {
     if (this.employees.length === 0) {
-      $http
-        .get('assets/data/employees.json') //https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001
-        .then(
-          function (response) {
-            this.employees = response.data;
-            // console.log(response);
-            cb();
-          }.bind(this)
-        );
+      $http.get('assets/data/employees.json').then(
+        function (response) {
+          this.employees = response.data;
+          cb();
+        }.bind(this)
+      );
     } else {
       cb();
     }
@@ -66,29 +54,18 @@ myLoginApp.service('employeeService', function ($http) {
     this.employees.push(employee);
     cb();
   };
-  /*this.checkData = function (cb) {
-    this.getEmployees;
-    if (this.employees.length === 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };*/
 });
 
 myLoginApp.service('menuService', function ($http) {
   this.menus = [];
   this.getMenus = function (cb) {
     if (this.menus.length === 0) {
-      $http
-        .get('assets/data/dashboardMenus.json') //https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001
-        .then(
-          function (response) {
-            this.menus = response.data;
-            // console.log(response);
-            cb();
-          }.bind(this)
-        );
+      $http.get('assets/data/dashboardMenus.json').then(
+        function (response) {
+          this.menus = response.data;
+          cb();
+        }.bind(this)
+      );
     } else {
       cb();
     }
@@ -99,9 +76,6 @@ myLoginApp.controller('menuController', function ($scope, menuService) {
   $scope.callBackFunction = function () {
     $scope.menus = menuService.menus;
   };
-  // if ($scope.employees === undefined) {
-  //   employeeService.getEmployees($scope.callBackFunction);
-  // }
   menuService.getMenus($scope.callBackFunction);
 });
 
@@ -112,27 +86,27 @@ myLoginApp.controller(
       type: 'object',
       title: 'Login User',
       properties: {
-        username: {
-          title: 'User Name',
+        userName: {
+          title: 'User Name *',
           type: 'string',
           pattern: '^[a-zA-Z]*$',
           validationMessage: 'Name contains only Alphabetic Characteres.',
           maxLength: 15,
           minLength: 3,
         },
-        password: {
-          title: 'Password',
+        passWord: {
+          title: 'Password *',
           type: 'string',
           minLength: 8,
         },
       },
-      required: ['username', 'password'],
+      required: ['userName', 'passWord'],
     };
 
     $scope.form = [
-      'username',
+      'userName',
       {
-        key: 'password',
+        key: 'passWord',
         type: 'password',
         placeholder: 'Enter a password',
       },
@@ -158,37 +132,22 @@ myLoginApp.controller(
     $scope.onLogin = function (form) {
       if (
         form.$valid &&
-        $scope.model.username !== '' &&
-        $scope.model.password !== ''
+        $scope.model.userName !== '' &&
+        $scope.model.passWord !== ''
       ) {
-        //     loginService.getAdmins($scope.callBackFunction);
         if (
-          $scope.model.username == 'admin' &&
-          $scope.model.password == 'adminadmin'
+          $scope.model.userName == 'admin' &&
+          $scope.model.passWord == 'adminadmin'
         ) {
           $window.sessionStorage.setItem('isAuth', true);
 
           $scope.isAuth = true;
-
-          // setTimeout(() => {
-          //   $scope.isAlert = false;
-          // }, 2000);
-
-          // window.location.href =
-          //   'http://127.0.0.1:5500/angularjsfinaltest/#!/employeelist';
           $location.path('/employeelist');
         } else {
-          // $window.sessionStorage.setItem('isAlert', 'Invalid Credentials');
           document.querySelector('.error-block').classList.remove('hidden');
           setTimeout(() => {
             document.querySelector('.error-block').classList.add('hidden');
           }, 3000);
-          // console.log('incorrect password!');
-          // setTimeout(() => {
-          //   $scope.isAlert = true;
-          // }, 2000);
-
-          // $scope.isAlert = false;
         }
       } else {
         document.querySelector('.error-block').classList.remove('hidden');
@@ -211,9 +170,6 @@ myLoginApp.controller(
     $scope.callBackFunction = function () {
       $scope.employees = employeeService.employees;
     };
-    // if ($scope.employees === undefined) {
-    //   employeeService.getEmployees($scope.callBackFunction);
-    // }
     employeeService.getEmployees($scope.callBackFunction);
   }
 );
@@ -230,7 +186,7 @@ myLoginApp.controller(
       title: 'Register Employee',
       properties: {
         firstname: {
-          title: 'First Name',
+          title: 'First Name *',
           type: 'string',
           pattern: '^[a-zA-Z]*$',
           validationMessage: 'Name contains only Alphabetic Characteres.',
@@ -238,7 +194,7 @@ myLoginApp.controller(
           minLength: 3,
         },
         lastname: {
-          title: 'Last Name',
+          title: 'Last Name *',
           type: 'string',
           pattern: '^[a-zA-Z]*$',
           validationMessage: 'Name contains only Alphabetic Characteres.',
@@ -246,28 +202,28 @@ myLoginApp.controller(
           minLength: 3,
         },
         email: {
-          title: 'Email',
+          title: 'Email *',
           type: 'string',
           pattern: '^\\S+@\\S+$',
           validationMessage: 'Email Should be Valid!',
           // description: 'Password will be used for login.',
         },
         gender: {
-          title: 'Gender',
+          title: 'Gender *',
           type: 'string',
         },
         mobile: {
-          title: 'Mobile Number',
+          title: 'Mobile Number *',
           type: 'string',
           minLength: 10,
           maxLength: 10,
         },
         dob: {
-          title: 'Date of Birth',
+          title: 'Date of Birth *',
           type: 'date',
         },
         salary: {
-          title: 'Salary',
+          title: 'Salary *',
           type: 'number',
           pattern: '^[1-9]+[0-9]*$',
         },
@@ -337,9 +293,6 @@ myLoginApp.controller(
         $location.path('/employeelist');
         setTimeout(() => {
           document.querySelector('.msg-block-success').classList.add('hidden');
-          // $location.path('/employeelist');
-          // window.location.href =
-          //   'http://127.0.0.1:5500/angularjsfinaltest/#!/employeelist';
         }, 1000);
       } else {
         document.querySelector('.msg-block-error').classList.remove('hidden');
@@ -347,14 +300,6 @@ myLoginApp.controller(
           document.querySelector('.msg-block-error').classList.add('hidden');
         }, 2000);
       }
-      /*if (!employeeService.checkData) {
-        document.querySelector('.msg-block-error').classList.remove('hidden');
-        setTimeout(() => {
-          document.querySelector('.msg-block-error').classList.add('hidden');
-          // window.location.href =
-          //   'http://127.0.0.1:5500/angularjsfinaltest/#!/employeelist';
-        }, 1000);
-      }*/
     };
   }
 );
